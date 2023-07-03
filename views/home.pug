@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  div.home
+    div.home-container 
+      h2 Welcome to #{title}
+      hr
+      p A user generated catalog of cocktails.  Feel free to contributre by adding new cocktails and recipes!
+      div.home-links-container
+        a.home-link(href = "/liquors") All Liquors
+        a.home-link(href = "/cocktails") All cocktails 

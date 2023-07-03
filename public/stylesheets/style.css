@@ -1,8 +1,30 @@
+@import "./home.css";
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
   color: #00B7FF;
+}
+
+.nav {
+  padding: 1rem 2rem;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-home-link {
+  color: white;
+  text-decoration: none;
 }
