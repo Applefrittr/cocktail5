@@ -1,8 +1,22 @@
 extends layout
 
 block content
-  h1 Cocktail List
-  p List of all cocktails goes here
+  div.nav-path 
+    a( class= "nav-path-links" href="/") Home
+    p  / 
+    a( class= "nav-path-links" href="/cocktails") Cocktails
 
-  div
-    a(href="/cocktails/create") Create New Cocktail
+    
+  div.list-page
+    div.list-container
+      h1 Cocktail List
+      hr
+
+      if cocktails
+        for cocktail in cocktails 
+          div.item
+            h3= cocktail.name 
+            p= cocktail.liquor.name
+            p= cocktail.description 
+      div
+        a(href="/cocktails/create") Create New Cocktail

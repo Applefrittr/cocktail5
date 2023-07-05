@@ -1,0 +1,36 @@
+.forms {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: max(25%, 350px);
+}
+
+.create-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.form-container {
+    padding: 3rem;
+    width: max(50%, 500px);
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.form-cancel {
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 1rem;
+}

@@ -1,5 +1,32 @@
 extends layout
 
 block content
-  h1 Create a New Cocktail
-  p Form fields here
+  div.nav-path 
+    a( class= "nav-path-links" href="/") Home
+    p  / 
+    a( class= "nav-path-links" href="/cocktails") Cocktails
+    p  / 
+    a( class= "nav-path-links" href="/cocktails/create") Create
+
+  div.create-page
+    div.form-container
+      h1 Add new cocktail
+
+      form#cocktail-form.forms(method='POST' action='')
+        label(for='name') Cocktail
+        input#name(type="text" name='name' value= (!cocktail ? '' : cocktail.name))
+        label(for='base') Base Liquor
+        select#base(type="select" name='base' placeholder="Select Base Liquor")
+          - liquors.sort((a,b) => { return b.name > a.name ? -1 : 1 });
+          for liquor in liquors 
+            option(value=liquor._id) #{liquor.name}
+        label(for='description') Description
+        textarea(type='text' name='description')= `${!cocktail ? '' : cocktail.description}`
+        div.form-buttons
+          button(type='submit') Create
+          a(class= 'form-cancel' href="/cocktails") Cancel
+
+    if errors
+      ul 
+        for error in errors 
+          li!= error.msg 

@@ -1,4 +1,6 @@
 @import "./home.css";
+@import "./forms.css";
+@import "./lists.css";
 
 * {
   margin: 0;
@@ -26,5 +28,15 @@ a {
 
 .nav-home-link {
   color: white;
+  text-decoration: none;
+}
+
+.nav-path {
+  display: flex;
+  padding: 1rem;
+  gap: .5rem;
+}
+
+.nav-path-links {
   text-decoration: none;
 }

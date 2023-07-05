@@ -1,7 +1,27 @@
 extends layout
 
 block content
-  h1 Add new Liquor
-  p Form fields here
+  div.nav-path 
+    a( class= "nav-path-links" href="/") Home
+    p  / 
+    a( class= "nav-path-links" href="/liquors") Liquors
+    p  / 
+    a( class= "nav-path-links" href="/liquors/create") Create
 
-  
+  div.create-page
+    div.form-container
+      h1 Add new Liquor
+
+      form#liquor-form.forms(method='POST' action='')
+        label(for='name') Liquor
+        input#name(type="text" name='name' value= (!liquor ? '' : liquor.name))
+        label(for='description') Description
+        textarea(type='text' name='description')= `${!liquor ? '' : liquor.description}`
+        div.form-buttons
+          button(type='submit') Create
+          a(class= 'form-cancel' href="/liquors") Cancel
+
+    if errors
+      ul 
+        for error in errors 
+          li!= error.msg 

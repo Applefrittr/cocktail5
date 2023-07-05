@@ -1,8 +1,31 @@
 extends layout
 
 block content
-  h1 Liquor List
-  p List of all liquors goes here
+  div.nav-path 
+    a( class= "nav-path-links" href="/") Home
+    p  / 
+    a( class= "nav-path-links" href="liquors") Liquors
 
-  div
-    a(href="/liquors/create") Add new Liquor
+    
+  div.list-page
+    div.list-container
+      div.list-header
+        h1 Liquor List
+        hr
+
+      if liquors
+        for liquor in liquors 
+          div.item
+            h3= liquor.name 
+            p= liquor.description
+            if liquor.drinks.length === 0
+              p= `Cocktails: No drinks added yet!`
+            else 
+              p Cocktails: 
+                for drink, index in liquor.drinks
+                  a(href= drink.url class="drink-links") #{drink.name}
+                  if index < liquor.drinks.length - 1
+                    span ,  
+
+      div
+        a(href="/liquors/create") Add new Liquor

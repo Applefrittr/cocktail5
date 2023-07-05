@@ -1,0 +1,23 @@
+.list-page {
+    padding: 5rem;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.item {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: blanchedalmond;
+}
+
+.drink-links {
+    text-decoration: none;
+}

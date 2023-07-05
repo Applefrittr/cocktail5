@@ -12,4 +12,4 @@ CocktailSchema.virtual("url").get(function () {
   return `/cocktails/${this.name}`;
 });
 
-module.exports = mongoose.model("Liquor", LiquorSchema);
+module.exports = mongoose.model("Cocktail", CocktailSchema);
