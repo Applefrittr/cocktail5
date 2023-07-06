@@ -15,8 +15,10 @@ block content
       if cocktails
         for cocktail in cocktails 
           div.item
-            h3= cocktail.name 
-            p= cocktail.liquor.name
+            h3
+              a(href= cocktail.url) #{cocktail.name}
+            p
+              a(href= cocktail.liquor.url) #{cocktail.liquor.name}
             p= cocktail.description 
       div
-        a(href="/cocktails/create") Create New Cocktail
+        a.link-button(href="/cocktails/create") Create New Cocktail

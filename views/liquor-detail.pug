@@ -1,0 +1,30 @@
+extends layout
+
+block content
+  div.nav-path 
+    a( class= "nav-path-links" href="/") Home
+    p  / 
+    a( class= "nav-path-links" href="/liquors") Liquors
+    p  / 
+    a( class= "nav-path-links" href= liquor.url) #{liquor.name}
+
+    
+  div.list-page
+    div.list-container
+      div.list-header
+        h1 Liquor Detail
+        hr
+        div.detail-container
+          h2= liquor.name
+          p= liquor.description
+          if liquor.drinks.length === 0
+            p= `Cocktails: No drinks added yet!`
+          else 
+            p Cocktails: 
+              for drink, index in liquor.drinks
+                a(href= drink.url class="drink-links") #{drink.name}
+                if index < liquor.drinks.length - 1
+                  span ,  
+          div.detail-links
+            a.link-button(href=`${liquor.url}/delete`) Delete
+            a.link-button(href=`${liquor.url}/update`) Update

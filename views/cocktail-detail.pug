@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div.nav-path 
+    a( class= "nav-path-links" href="/") Home
+    p  / 
+    a( class= "nav-path-links" href="/cocktails") Cocktails
+    p  / 
+    a( class= "nav-path-links" href= cocktail.url) #{cocktail.name}
+
+    
+  div.list-page
+    div.list-container
+      div.list-header
+        h1 Cocktail Detail
+        hr
+        div.detail-container
+          h2= cocktail.name
+          p 
+            a(href=cocktail.liquor.url) #{cocktail.liquor.name}
+          p= cocktail.description
+          
+          div.detail-links
+            a.link-button(href=`${cocktail.url}/delete`) Delete
+            a.link-button(href=`${cocktail.url}/update`) Update

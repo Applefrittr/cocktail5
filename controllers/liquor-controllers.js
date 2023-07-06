@@ -3,9 +3,16 @@ const { body, validationResult } = require("express-validator");
 const Liquor = require("../models/liquor");
 
 exports.liquor_list = asyncHandler(async (req, res, next) => {
-  const liquors = await Liquor.find().populate("drinks").exec()
+  const liquors = await Liquor.find().populate("drinks").exec();
 
   res.render("liquor-list", { liquors });
+});
+
+exports.liquor_detail = asyncHandler(async (req, res, next) => {
+  const liquor = await Liquor.findOne({ name: req.params.name })
+    .populate("drinks")
+    .exec();
+  res.render("liquor-detail", { liquor });
 });
 
 exports.liquor_create_get = asyncHandler(async (req, res, next) => {

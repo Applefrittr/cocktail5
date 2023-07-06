@@ -23,13 +23,6 @@
     gap: .5rem;
 }
 
-.form-cancel {
-    color: black;
-    border: 1px solid black;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
 .form-buttons {
     display: flex;
     gap: 1rem;

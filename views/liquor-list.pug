@@ -16,7 +16,8 @@ block content
       if liquors
         for liquor in liquors 
           div.item
-            h3= liquor.name 
+            h3
+              a(href= `/liquors/${liquor.name}`) #{liquor.name}
             p= liquor.description
             if liquor.drinks.length === 0
               p= `Cocktails: No drinks added yet!`
@@ -28,4 +29,4 @@ block content
                     span ,  
 
       div
-        a(href="/liquors/create") Add new Liquor
+        a(href="/liquors/create" class= 'link-button') Add new Liquor

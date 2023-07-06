@@ -9,6 +9,14 @@ exports.cocktail_list = asyncHandler(async (req, res, next) => {
   res.render("cocktail-list", { cocktails });
 });
 
+exports.cocktail_detail = asyncHandler(async (req, res, next) => {
+  const nameFix = req.params.name.replaceAll("-", " ");
+  const cocktail = await Cocktail.findOne({ name: nameFix })
+    .populate("liquor")
+    .exec();
+  res.render("cocktail-detail", { cocktail });
+});
+
 exports.cocktail_create_get = asyncHandler(async (req, res, next) => {
   const liquors = await Liquor.find().exec();
 
@@ -40,15 +48,17 @@ exports.cocktail_create_post = [
         errors: errors.array(),
       });
     } else {
-      const cocktailExists = await Cocktail.findOne({ name: req.body.name }).exec();
+      const cocktailExists = await Cocktail.findOne({
+        name: req.body.name,
+      }).exec();
 
       if (cocktailExists) res.redirect(cocktailExists.url);
       else {
         await cocktail.save();
         const liquor = await Liquor.findById(req.body.base).exec();
-        console.log(req.body.base, liquor)
-        liquor.drinks.push(cocktail._id)
-        await liquor.save()
+        console.log(req.body.base, liquor);
+        liquor.drinks.push(cocktail._id);
+        await liquor.save();
         res.redirect("/cocktails");
       }
     }

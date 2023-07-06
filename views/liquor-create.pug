@@ -18,8 +18,8 @@ block content
         label(for='description') Description
         textarea(type='text' name='description')= `${!liquor ? '' : liquor.description}`
         div.form-buttons
-          button(type='submit') Create
-          a(class= 'form-cancel' href="/liquors") Cancel
+          button(type='submit' class= 'link-button') Create
+          a(class= 'link-button' href="/liquors") Cancel
 
     if errors
       ul 

@@ -17,11 +17,15 @@ router.get("/liquors/create", liquor_controller.liquor_create_get);
 
 router.post("/liquors/create", liquor_controller.liquor_create_post);
 
+router.get("/liquors/:name", liquor_controller.liquor_detail);
+
 // Cocktail routes
 router.get("/cocktails", cocktail_controller.cocktail_list);
 
 router.get("/cocktails/create", cocktail_controller.cocktail_create_get);
 
 router.post("/cocktails/create", cocktail_controller.cocktail_create_post);
+
+router.get("/cocktails/:name", cocktail_controller.cocktail_detail);
 
 module.exports = router;
