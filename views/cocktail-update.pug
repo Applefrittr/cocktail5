@@ -6,11 +6,13 @@ block content
     p  / 
     a( class= "nav-path-links" href="/cocktails") Cocktails
     p  / 
-    a( class= "nav-path-links" href="/cocktails/create")= `${cocktail ? 'Update' : 'Create'}`
+    a( class= "nav-path-links" href=`${cocktail.url}`) #{cocktail.name}
+    p  / 
+    a( class= "nav-path-links" href=`${cocktail.url}/update`) Update
 
   div.create-page
     div.form-container
-      h1 Add new cocktail
+      h1 Update Cocktail
 
       form#cocktail-form.forms(method='POST' action='')
         label(for='name') Cocktail
@@ -18,8 +20,11 @@ block content
         label(for='base') Base Liquor
         select#base(type="select" name='base' placeholder="Select Base Liquor")
           - liquors.sort((a,b) => { return b.name > a.name ? -1 : 1 });
-          for liquor in liquors 
-            option(value=liquor._id) #{liquor.name}
+          for liquor in liquors
+            if (liquor.name === cocktail.liquor.name) 
+                option(value=liquor._id selected) #{liquor.name}
+            else
+                option(value=liquor._id) #{liquor.name}
         label(for='description') Description
         textarea(type='text' name='description')= `${!cocktail ? '' : cocktail.description}`
         div.form-buttons
@@ -27,6 +32,6 @@ block content
           a(class= 'link-button' href="/cocktails") Cancel
 
     if errors
-      ul.errors
+      ul.errors 
         for error in errors 
           li!= error.msg 

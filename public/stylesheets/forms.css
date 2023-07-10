@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    width: max(25%, 350px);
+    width: max(33%, 500px);
+    padding: 1rem;
 }
 
 .create-page {
@@ -11,10 +12,11 @@
     justify-content: center;
     align-items: center;
     flex: 1;
+    gap: 1rem;
 }
 
 .form-container {
-    padding: 3rem;
+    padding: 2rem;
     width: max(50%, 500px);
     border: 1px solid black;
     border-radius: 5px;
@@ -26,4 +28,14 @@
 .form-buttons {
     display: flex;
     gap: 1rem;
+}
+
+.errors {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: lightcoral;
 }

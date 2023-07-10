@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  div.nav-path 
+    a( class= "nav-path-links" href="/") Home
+    p  / 
+    a( class= "nav-path-links" href="/cocktails") Cocktails
+    p  / 
+    a( class= "nav-path-links" href= cocktail.url) #{cocktail.name}
+    p  / 
+    a( class= "nav-path-links" href= `${cocktail.url}/delete`) Delete
+
+    
+  div.list-page
+    h1 Delete Cocktail: #{cocktail.name}
+    hr
+    form#cocktail-form.forms(method='POST' action='')
+        h2 Are you sure you want to delete?
+        input#id(type="hidden" name='id' value= cocktail._id )
+        div.form-buttons
+          button(type='submit' class= 'link-button') Delete
+          a(class= 'link-button' href=cocktail.url) Cancel

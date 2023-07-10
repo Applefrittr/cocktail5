@@ -6,11 +6,13 @@ block content
     p  / 
     a( class= "nav-path-links" href="/liquors") Liquors
     p  / 
-    a( class= "nav-path-links" href="/liquors/create") Create
+    a( class= "nav-path-links" href=`${liquor.url}`) #{liquor.name}
+    p  / 
+    a( class= "nav-path-links" href=`${liquor.url}/update`) Update
 
   div.create-page
     div.form-container
-      h1 Add new Liquor
+      h1 Update Liquor
 
       form#liquor-form.forms(method='POST' action='')
         label(for='name') Liquor
@@ -18,7 +20,7 @@ block content
         label(for='description') Description
         textarea(type='text' name='description')= `${!liquor ? '' : liquor.description}`
         div.form-buttons
-          button(type='submit' class= 'link-button') Add
+          button(type='submit' class= 'link-button') Update
           a(class= 'link-button' href="/liquors") Cancel
 
     if errors

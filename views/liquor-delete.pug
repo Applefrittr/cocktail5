@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  div.nav-path 
+    a( class= "nav-path-links" href="/") Home
+    p  / 
+    a( class= "nav-path-links" href="/liquors") Liquors
+    p  / 
+    a( class= "nav-path-links" href= liquor.url) #{liquor.name}
+    p  / 
+    a( class= "nav-path-links" href= `${liquor.url}/delete`) Delete
+
+    
+  div.list-page
+    div.list-container
+      form#liquor-form.forms(method='POST' action='')
+        if (liquor.drinks.length === 0)
+            h1 Delete Liquor: #{liquor.name}
+            hr
+            h2 Are you sure you want to delete?
+            input#id(type="hidden" name='id' value= liquor._id )
+            div.form-buttons
+            button(type='submit' class= 'link-button') Delete
+            a(class= 'link-button' href=liquor.url) Cancel
+        else 
+            h1 Please delete the following cocktails before continuing:
+            hr
+            ul
+              for drink in liquor.drinks
+                li 
+                  a(href= drink.url) #[Strong #{drink.name}]
+                  p #{drink.description}
