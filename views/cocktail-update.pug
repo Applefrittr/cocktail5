@@ -27,11 +27,16 @@ block content
                 option(value=liquor._id) #{liquor.name}
         label(for='description') Description
         textarea(type='text' name='description')= `${!cocktail ? '' : cocktail.description}`
+        label#password(for= "password") #[Strong Password*]
+        input(type="password" name="password")
         div.form-buttons
-          button(type='submit' class= 'link-button') Create
+          button(type='submit' class= 'link-button') Update
           a(class= 'link-button' href="/cocktails") Cancel
 
     if errors
       ul.errors 
         for error in errors 
           li!= error.msg 
+    if password
+      ul.errors
+        li= password

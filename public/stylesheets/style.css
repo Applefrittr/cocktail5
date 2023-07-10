@@ -51,9 +51,14 @@ a {
   background-color: #00B7FF;
   outline: none;
   appearance: none;
-  border: none;
+  border: solid 1px black;
+  box-shadow: 1px 1px 5px black;
   font-family: inherit;
   font-size: inherit;
+}
+
+.link-button:hover {
+  box-shadow: none;
 }
 
 .link-button:hover {

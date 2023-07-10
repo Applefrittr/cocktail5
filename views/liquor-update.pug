@@ -19,6 +19,8 @@ block content
         input#name(type="text" name='name' value= (!liquor ? '' : liquor.name))
         label(for='description') Description
         textarea(type='text' name='description')= `${!liquor ? '' : liquor.description}`
+        label#password(for= "password") #[Strong Password*]
+        input(type="password" name="password")
         div.form-buttons
           button(type='submit' class= 'link-button') Update
           a(class= 'link-button' href="/liquors") Cancel
@@ -27,3 +29,6 @@ block content
       ul.errors 
         for error in errors 
           li!= error.msg 
+    if password 
+      ul.errors 
+        li= password

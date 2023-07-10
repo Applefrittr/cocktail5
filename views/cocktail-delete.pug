@@ -17,6 +17,11 @@ block content
     form#cocktail-form.forms(method='POST' action='')
         h2 Are you sure you want to delete?
         input#id(type="hidden" name='id' value= cocktail._id )
+        label#password(for= "password") #[Strong Password*]
+        input(type="password" name="password")
         div.form-buttons
           button(type='submit' class= 'link-button') Delete
           a(class= 'link-button' href=cocktail.url) Cancel
+        if error
+          ul.errors
+            li= error

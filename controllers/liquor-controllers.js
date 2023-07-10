@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const Liquor = require("../models/liquor");
+const adminPassword = require("../admin");
 
 exports.liquor_list = asyncHandler(async (req, res, next) => {
   const liquors = await Liquor.find().populate("drinks").exec();
@@ -65,9 +66,18 @@ exports.liquor_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.liquor_delete_post = asyncHandler(async (req, res, next) => {
-  await Liquor.findByIdAndRemove(req.body.id);
+  if (req.body.password != adminPassword) {
+    const liquor = await Liquor.findOne({
+      name: req.params.name,
+    })
+      .populate("drinks")
+      .exec();
 
-  res.redirect("/liquors");
+    res.render("liquor-delete", { liquor, error: "Incorrect Password" });
+  } else {
+    await Liquor.findByIdAndRemove(req.body.id);
+    res.redirect("/liquors");
+  }
 });
 
 exports.liquor_update_get = asyncHandler(async (req, res, next) => {
@@ -95,6 +105,9 @@ exports.liquor_update_post = [
         liquor,
         errors: errors.array(),
       });
+      return;
+    } else if (req.body.password != adminPassword) {
+      res.render("liquor-update", { password: "Incorrect Password", liquor });
       return;
     } else {
       liquor.name = req.body.name;

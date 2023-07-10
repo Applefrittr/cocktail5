@@ -19,9 +19,14 @@ block content
             hr
             h2 Are you sure you want to delete?
             input#id(type="hidden" name='id' value= liquor._id )
+            label#password(for= "password") #[Strong Password*]
+            input(type="password" name="password")
             div.form-buttons
-            button(type='submit' class= 'link-button') Delete
-            a(class= 'link-button' href=liquor.url) Cancel
+              button(type='submit' class= 'link-button') Delete
+              a(class= 'link-button' href=liquor.url) Cancel
+            if error
+              ul.errors
+                li= error
         else 
             h1 Please delete the following cocktails before continuing:
             hr
