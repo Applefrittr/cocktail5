@@ -1,7 +1,7 @@
 .home-container {
     padding: 3rem;
     width: max(50%, 500px);
-    border: 1px solid black;
+    border: 1px solid white;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@
 .home-link {
     font-style: none;
     color: black;
-    border: 1px solid black;
+    border: 1px solid white;
     background-color: grey;
     border-radius: 10px;
     padding: 1rem 2rem;

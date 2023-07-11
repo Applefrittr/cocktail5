@@ -11,8 +11,38 @@
 
 body {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-image: url("../images/bar.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  filter: blur(5px);
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-color: black;
 }
 
 a {
@@ -52,7 +82,7 @@ a {
   outline: none;
   appearance: none;
   border: solid 1px black;
-  box-shadow: 1px 1px 5px black;
+  box-shadow: 1px 1px 5px white;
   font-family: inherit;
   font-size: inherit;
 }
@@ -63,4 +93,12 @@ a {
 
 .link-button:hover {
   cursor: pointer;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: rgba(0, 0, 0, .5);
+  color: white;
 }

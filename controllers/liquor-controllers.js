@@ -6,14 +6,14 @@ const adminPassword = require("../admin");
 exports.liquor_list = asyncHandler(async (req, res, next) => {
   const liquors = await Liquor.find().populate("drinks").exec();
 
-  res.render("liquor-list", { liquors });
+  res.render("liquor-list", { liquors, title: "Liquor List"});
 });
 
 exports.liquor_detail = asyncHandler(async (req, res, next) => {
   const liquor = await Liquor.findOne({ name: req.params.name })
     .populate("drinks")
     .exec();
-  res.render("liquor-detail", { liquor });
+  res.render("liquor-detail", { liquor, title: `${req.params.name} Detail` });
 });
 
 exports.liquor_create_get = asyncHandler(async (req, res, next) => {
@@ -62,7 +62,7 @@ exports.liquor_delete_get = asyncHandler(async (req, res, next) => {
     .populate("drinks")
     .exec();
 
-  res.render("liquor-delete", { liquor });
+  res.render("liquor-delete", { liquor, title: `Delete ${req.params.name}` });
 });
 
 exports.liquor_delete_post = asyncHandler(async (req, res, next) => {
@@ -83,7 +83,7 @@ exports.liquor_delete_post = asyncHandler(async (req, res, next) => {
 exports.liquor_update_get = asyncHandler(async (req, res, next) => {
   const liquor = await Liquor.findOne({ name: req.params.name }).exec();
 
-  res.render("liquor-update", { liquor });
+  res.render("liquor-update", { liquor, title: `Update ${req.params.name}` });
 });
 
 exports.liquor_update_post = [

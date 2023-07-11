@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const asyncHandler = require("express-async-handler");
 
 const liquor_controller = require("../controllers/liquor-controllers");
 const cocktail_controller = require("../controllers/cocktail-controllers");

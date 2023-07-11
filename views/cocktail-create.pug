@@ -6,13 +6,13 @@ block content
     p  / 
     a( class= "nav-path-links" href="/cocktails") Cocktails
     p  / 
-    a( class= "nav-path-links" href="/cocktails/create")= `${cocktail ? 'Update' : 'Create'}`
+    a( class= "nav-path-links" href="/cocktails/create") Create
 
   div.create-page
     div.form-container
       h1 Add new cocktail
 
-      form#cocktail-form.forms(method='POST' action='')
+      form#cocktail-form.forms(method='POST' action='' enctype= "multipart/form-data")
         label(for='name') Cocktail
         input#name(type="text" name='name' value= (!cocktail ? '' : cocktail.name))
         label(for='base') Base Liquor
@@ -22,6 +22,8 @@ block content
             option(value=liquor._id) #{liquor.name}
         label(for='description') Description
         textarea(type='text' name='description')= `${!cocktail ? '' : cocktail.description}`
+        label(for='image') Upload Image 
+        input#image(type="file" name="image")
         div.form-buttons
           button(type='submit' class= 'link-button') Create
           a(class= 'link-button' href="/cocktails") Cancel
