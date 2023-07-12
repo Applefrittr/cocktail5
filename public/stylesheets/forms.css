@@ -39,3 +39,14 @@
     border-radius: 10px;
     background-color: lightcoral;
 }
+
+.img-preview {
+    height: 100px;
+    width: 100px;
+    background-color: grey;
+    border: 2px dashed white;
+    position: absolute;
+    right: 3rem;
+    bottom: 3rem;
+    border-radius: 5px;
+}

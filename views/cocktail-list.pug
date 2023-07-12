@@ -15,10 +15,12 @@ block content
       if cocktails
         for cocktail in cocktails 
           div.item
-            h3
-              a(href= cocktail.url) #{cocktail.name}
-            p
-              a(href= cocktail.liquor.url) #{cocktail.liquor.name}
-            p= cocktail.description 
+            div.item-description
+              h3
+                a(href= cocktail.url) #{cocktail.name}
+              p
+                a(href= cocktail.liquor.url) #{cocktail.liquor.name}
+              p= cocktail.description 
+            img.list-img(src=cocktail.imageURL, alt=cocktail.name)
       div
         a.link-button(href="/cocktails/create") Create New Cocktail

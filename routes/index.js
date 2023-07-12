@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const path = require('path');
 
 const liquor_controller = require("../controllers/liquor-controllers");
 const cocktail_controller = require("../controllers/cocktail-controllers");
@@ -8,6 +9,10 @@ const cocktail_controller = require("../controllers/cocktail-controllers");
 router.get("/", function (req, res, next) {
   res.render("home", { title: "Cocktail5" });
 });
+
+// router.get("/images/:path", (req, res, next) => {
+//   res.sendFile(path.join(__dirname, '..', 'public', 'images', 'bar.jpg'))
+// })
 
 // Liquor routes
 router.get("/liquors", liquor_controller.liquor_list);
@@ -49,4 +54,9 @@ router.post(
   cocktail_controller.cocktail_update_post
 );
 
+// router.get("/public/images/:path", (req, res, next) => {
+//   console.log("requesting image");
+//   res.sendFile(`public/images/bar.jpg`);
+//   res.end();
+// });
 module.exports = router;

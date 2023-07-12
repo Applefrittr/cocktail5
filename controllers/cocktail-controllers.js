@@ -4,7 +4,8 @@ const Liquor = require("../models/liquor");
 const Cocktail = require("../models/cocktail");
 const adminPassword = require("../admin");
 const multer = require("multer");
-const upload = multer({ dest: "public/images" });
+const upload = multer({ dest: "./public/images" });
+const helpers = require("../public/javascripts/functions");
 
 exports.cocktail_list = asyncHandler(async (req, res, next) => {
   const cocktails = await Cocktail.find().populate("liquor").exec();
@@ -27,13 +28,13 @@ exports.cocktail_create_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.cocktail_create_post = [
+  upload.single("image"),
   body("name", "Cocktail name must contain at least 3 characters")
     .trim()
     .isLength({ min: 3 })
     .escape(),
   body("base").escape(),
   body("description").trim().escape(),
-  upload.single("image"),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     console.log(req.body, req.file);
@@ -41,11 +42,15 @@ exports.cocktail_create_post = [
       name: req.body.name,
       liquor: req.body.base,
       description: req.body.description,
+      imageURL: `/images/${req.file.filename}`,
     });
 
+    console.log(cocktail);
+
+    // From validation fails
     if (!errors.isEmpty()) {
       const liquors = await Liquor.find().exec();
-      console.log(req.body, req.file);
+      helpers.deleteFile(req.file.path); // Call deleteFile helper function to delete uploaded image
       res.render("cocktail-create", {
         liquors,
         cocktail,
@@ -57,7 +62,10 @@ exports.cocktail_create_post = [
         name: req.body.name,
       }).exec();
 
-      if (cocktailExists) res.redirect(cocktailExists.url);
+      if (cocktailExists) {
+        helpers.deleteFile(req.file.path);
+        res.redirect(cocktailExists.url);
+      }
       else {
         await cocktail.save();
         const liquor = await Liquor.findById(req.body.base).exec();
@@ -86,7 +94,8 @@ exports.cocktail_delete_post = asyncHandler(async (req, res, next) => {
     }).exec();
     res.render("cocktail-delete", { cocktail, error: "Incorrect Password" });
   } else {
-    await Cocktail.findByIdAndRemove(req.body.id);
+    const removed = await Cocktail.findByIdAndRemove(req.body.id);
+    helpers.deleteFile(`public${removed.imageURL}`) // delete removed cocktail's image from server
     res.redirect("/cocktails");
   }
 });
