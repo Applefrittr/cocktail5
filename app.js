@@ -11,7 +11,8 @@ const app = express();
 
 // connect to MongoDB
 const mongoose = require("mongoose");
-const dev_db_url = require("./mongo")
+//const dev_db_url = require("./mongo")
+const dev_db_url = ""
 mongoose.set("strictQuery", false);
 
 const mongoDB = process.env.MONGODB_URI || dev_db_url;

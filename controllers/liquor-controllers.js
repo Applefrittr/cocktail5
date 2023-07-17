@@ -1,12 +1,13 @@
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const Liquor = require("../models/liquor");
-const adminPassword = require("../admin");
+//const adminPassword = require("../admin");
+const adminPassword = process.env.ADMIN;
 
 exports.liquor_list = asyncHandler(async (req, res, next) => {
   const liquors = await Liquor.find().populate("drinks").exec();
 
-  res.render("liquor-list", { liquors, title: "Liquor List"});
+  res.render("liquor-list", { liquors, title: "Liquor List" });
 });
 
 exports.liquor_detail = asyncHandler(async (req, res, next) => {

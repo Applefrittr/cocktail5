@@ -2,7 +2,8 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const Liquor = require("../models/liquor");
 const Cocktail = require("../models/cocktail");
-const adminPassword = require("../admin");
+//const adminPassword = require("../admin");
+const adminPassword = process.env.ADMIN;
 const multer = require("multer");
 const upload = multer({ dest: "./public/images" });
 const helpers = require("../public/javascripts/functions");
@@ -65,8 +66,7 @@ exports.cocktail_create_post = [
       if (cocktailExists) {
         helpers.deleteFile(req.file.path);
         res.redirect(cocktailExists.url);
-      }
-      else {
+      } else {
         await cocktail.save();
         const liquor = await Liquor.findById(req.body.base).exec();
         liquor.drinks.push(cocktail._id);
@@ -95,7 +95,7 @@ exports.cocktail_delete_post = asyncHandler(async (req, res, next) => {
     res.render("cocktail-delete", { cocktail, error: "Incorrect Password" });
   } else {
     const removed = await Cocktail.findByIdAndRemove(req.body.id);
-    helpers.deleteFile(`public${removed.imageURL}`) // delete removed cocktail's image from server
+    helpers.deleteFile(`public${removed.imageURL}`); // delete removed cocktail's image from server
     res.redirect("/cocktails");
   }
 });
@@ -154,7 +154,7 @@ exports.cocktail_update_post = [
       cocktail.description = req.body.description;
       if (req.file.path) {
         helpers.deleteFile(`public${cocktail.imageURL}`); // Delete current image on sever
-        cocktail.imageURL = `/images/${req.file.filename}`
+        cocktail.imageURL = `/images/${req.file.filename}`;
       }
       await cocktail.save();
       res.redirect(cocktail.url);
