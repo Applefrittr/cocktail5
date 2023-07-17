@@ -152,7 +152,7 @@ exports.cocktail_update_post = [
     } else {
       cocktail.name = req.body.name;
       cocktail.description = req.body.description;
-      if (req.file.path) {
+      if (req.file) {
         helpers.deleteFile(`public${cocktail.imageURL}`); // Delete current image on sever
         cocktail.imageURL = `/images/${req.file.filename}`;
       }
