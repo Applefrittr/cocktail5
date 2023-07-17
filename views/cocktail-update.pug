@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  script(src = "/javascripts/preview.js") 
+
   div.nav-path 
     a( class= "nav-path-links" href="/") Home
     p  / 
@@ -14,7 +16,7 @@ block content
     div.form-container
       h1 Update Cocktail
 
-      form#cocktail-form.forms(method='POST' action='')
+      form#cocktail-form.forms(method='POST' action='' enctype= "multipart/form-data")
         label(for='name') Cocktail
         input#name(type="text" name='name' value= (!cocktail ? '' : cocktail.name))
         label(for='base') Base Liquor
@@ -27,11 +29,17 @@ block content
                 option(value=liquor._id) #{liquor.name}
         label(for='description') Description
         textarea(type='text' name='description')= `${!cocktail ? '' : cocktail.description}`
+        div.img-element
+          div.file-upload
+            label(for='image') Upload Image 
+            input#image(type="file" name="image" onchange="preview(event)")
+          img#output.img-preview(src=`${cocktail.imageURL ? cocktail.imageURL : ''}`, alt="")
         label#password(for= "password") #[Strong Password*]
         input(type="password" name="password")
         div.form-buttons
           button(type='submit' class= 'link-button') Update
           a(class= 'link-button' href="/cocktails") Cancel
+        
 
     if errors
       ul.errors 

@@ -3,7 +3,6 @@ extends layout
 block content
   script(src = "/javascripts/preview.js") 
 
-  
   div.nav-path 
     a( class= "nav-path-links" href="/") Home
     p  / 
@@ -25,13 +24,15 @@ block content
             option(value=liquor._id) #{liquor.name}
         label(for='description') Description
         textarea(type='text' name='description')= `${!cocktail ? '' : cocktail.description}`
-        label(for='image') Upload Image 
-        input#image(type="file" name="image" onchange="preview(event)")
+        div.img-element
+          div.file-upload
+            label(for='image') Upload Image 
+            input#image(type="file" name="image" onchange="preview(event)")
+          img#output.img-preview(src="", alt="")
         div.form-buttons
           button(type='submit' class= 'link-button') Create
           a(class= 'link-button' href="/cocktails") Cancel
-        img#output.img-preview(src="", alt="")
-
+  
     if errors
       ul.errors
         for error in errors 

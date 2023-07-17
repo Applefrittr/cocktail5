@@ -21,6 +21,7 @@ block content
               p
                 a(href= cocktail.liquor.url) #{cocktail.liquor.name}
               p= cocktail.description 
-            img.list-img(src=cocktail.imageURL, alt=cocktail.name)
+            if (cocktail.imageURL)
+              img.list-img(src=cocktail.imageURL, alt=cocktail.name)
       div
         a.link-button(href="/cocktails/create") Create New Cocktail

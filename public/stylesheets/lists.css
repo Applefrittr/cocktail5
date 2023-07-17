@@ -16,7 +16,7 @@
     align-items: center;
     border: 1px solid black;
     border-radius: 10px;
-    background-color: white;
+    background-color: rgba(250, 250, 250, .95);
     color: black;
     gap: 3rem;
 }
@@ -35,4 +35,10 @@
     height: 100px;
     width: 100px;
     border-radius: 10px;
+}
+
+@media (max-width: 500px) {
+    .list-page {
+        padding: 5rem 2rem;
+    }
 }

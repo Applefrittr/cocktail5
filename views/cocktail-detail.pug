@@ -15,11 +15,15 @@ block content
         h1 Cocktail Detail
         hr
         div.detail-container
-          h2= cocktail.name
-          p 
-            a(href=cocktail.liquor.url) #{cocktail.liquor.name}
-          p= cocktail.description
-          
+          div.detail-item
+            if (cocktail.imageURL)
+              img.detail-img(src=cocktail.imageURL, alt=cocktail.name)
+            div.detail-description
+              h2= cocktail.name
+              p 
+                a(href=cocktail.liquor.url) #{cocktail.liquor.name}
+              p= cocktail.description
+            
           div.detail-links
             a.link-button(href=`${cocktail.url}/delete`) Delete
             a.link-button(href=`${cocktail.url}/update`) Update

@@ -115,6 +115,7 @@ exports.cocktail_update_get = asyncHandler(async (req, res, next) => {
 });
 
 exports.cocktail_update_post = [
+  upload.single("image"),
   body("name", "Cocktail name must contain at least 3 characters")
     .trim()
     .isLength({ min: 3 })
@@ -131,7 +132,9 @@ exports.cocktail_update_post = [
 
     const liquors = await Liquor.find().exec();
 
+    // form validation fails
     if (!errors.isEmpty()) {
+      helpers.deleteFile(req.file.path); // Call deleteFile helper function to delete uploaded image
       res.render("cocktail-update", {
         cocktail,
         errors: errors.array(),
@@ -139,6 +142,7 @@ exports.cocktail_update_post = [
       });
       return;
     } else if (req.body.password != adminPassword) {
+      helpers.deleteFile(req.file.path); // Call deleteFile helper function to delete uploaded image
       res.render("cocktail-update", {
         cocktail,
         password: "Incorrect Password",
@@ -148,6 +152,10 @@ exports.cocktail_update_post = [
     } else {
       cocktail.name = req.body.name;
       cocktail.description = req.body.description;
+      if (req.file.path) {
+        helpers.deleteFile(`public${cocktail.imageURL}`); // Delete current image on sever
+        cocktail.imageURL = `/images/${req.file.filename}`
+      }
       await cocktail.save();
       res.redirect(cocktail.url);
     }
